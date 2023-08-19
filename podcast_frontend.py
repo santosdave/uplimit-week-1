@@ -26,6 +26,18 @@ def main():
         st.subheader("Episode Title")
         st.write(podcast_info['podcast_details']['episode_title'])
 
+        guest_info = podcast_info['podcast_guest']
+
+        # Split the podcast guest information into name and summary
+        guest_parts = guest_info.split(',')
+
+        if len(guest_parts) > 1:
+            guest_name = guest_parts[0].strip()
+            guest_summary = '(' + guest_parts[1]
+        else:
+            guest_name = guest_parts[0].strip()
+            guest_summary = None  # No summary provided
+
         # Display the podcast summary and the cover image in a side-by-side layout
         col1, col2 = st.columns([7, 3])
 
@@ -42,11 +54,11 @@ def main():
 
         with col3:
             st.subheader("Podcast Guest")
-            st.write(podcast_info['podcast_guest']['name'])
+            st.write(guest_name)
 
         with col4:
             st.subheader("Podcast Guest Details")
-            st.write(podcast_info["podcast_guest"]['summary'])
+            st.write(guest_summary)
 
         # Display the five key moments
         st.subheader("Key Moments")
